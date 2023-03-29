@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import SearchInput from '../utils/SearchInput'
-import useOnline from '../utils/useOnline'
 import "./Body.css"
 import { FoodCard } from './FoodCard'
-import Shimmer from './Shimmer'
-import { filterdata } from "../utils/helper";
-import CircleIcon from '@mui/icons-material/Circle';
+import { Shimmer } from './Shimmer'
 
 export const Body = () => {
   const [inputVal,setInputVal] = useState('');
@@ -16,12 +12,11 @@ export const Body = () => {
     getAllRestaurentData()
   },[]);
 
-  const isOnline = useOnline();
-  
-  if (!isOnline) {
-    return <h3 className='internetConError'><CircleIcon color='error'/> No internet Connection....Check the Network conections</h3>
-  } 
-
+  const filterdata = (inputVal,allRestaurants) => {
+    return allRestaurants.filter((restaurant)=>{
+      return restaurant?.data?.name?.toLowerCase()?.includes(inputVal?.toLowerCase())
+    })
+  }
   
   const onChangeFun = (e) => {
     setInputVal(e?.target?.value)
@@ -49,11 +44,14 @@ export const Body = () => {
     
   }
   
- if(!allRestaurants) return null;
+  if(!allRestaurants) return null;
 
   return (allRestaurants?.length === 0 ?
     <>
-      <SearchInput inputVal = {inputVal} onChangeFun = {onChangeFun} />
+      <div className="input-search">
+        <input type="text" placeholder='Search Restaurent'
+        value={inputVal} onChange={onChangeFun}/>
+      </div>
       <div className='body'>
           {Array(24).fill("").map((restaurant,i) => {
              return <Shimmer key={i} restaurant = {restaurant}/>
@@ -63,7 +61,11 @@ export const Body = () => {
         
      :(
         <>
-        <SearchInput inputVal = {inputVal} onChangeFun = {onChangeFun} />
+        <div className="input-search">
+          <input 
+          type="text" placeholder='Search Restaurent'
+          value={inputVal} onChange={onChangeFun}/>
+        </div>
         <div className="body">
             {
               (fillteredRestaurants?.length===0 ? <h1>No Matches are found......</h1>  :

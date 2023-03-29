@@ -3,9 +3,9 @@ import { imgCdnLink } from '../constants'
 import { Link } from 'react-router-dom'
 
 export const FoodCard = (props) => {
-  const {name,cloudinaryImageId,cuisines,id} = props.restaurant.data
+  const {name,cloudinaryImageId,cuisines} = props.restaurant.data
   return (
-    <Link to ={ `/restaurent/${id}`}>
+    <Link to = "/restaurent/30532">
       <div className="card">
         
         <img alt="foodImg" src={imgCdnLink + cloudinaryImageId} />

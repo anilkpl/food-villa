@@ -7,14 +7,9 @@ import './Logo.css'
 
 export const Header = () => {
   return (
-    <>
-   
     <div className="header">
-        
         <Logo />
         <NavItems />
-        
     </div>
-    </>
   )
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const Shimmer = () => {
+export const Shimmer = () => {
   return (
-        <div className="shimmer-card">
+        <div className="card">
             <Skeleton height={100}/>
             <h4><Skeleton /></h4>
             <div className= "cuisines"><Skeleton /></div>
@@ -15,5 +15,3 @@ const Shimmer = () => {
     
   )
 }
-
-export default Shimmer;
