@@ -1,25 +1,24 @@
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import { useParams } from "react-router-dom";
-
+import { imgCdnLink } from "../constants";
+import RestaurentInfoShimmer from "../componnents/RestaurentInfoShimmer";
+import useRestaurentInfo from "../utils/useRestaurentInfo";
+import "./RestaurentMenu.css"
 
 
 const RestaurentMenu = () => {
-    const {id} = useParams();
-    //console.log(id)
-    useEffect(() => {
-        getRestaurentInfo();
-    },[]); 
-
-    async function getRestaurentInfo() {
-        
-        const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=30532submitAction=ENTER")
-        const restaurentInfo = await data?.json();
-        console.log(restaurentInfo)
-
-    }
-    return (
-        <div>
+    const { id } = useParams();
+    const restaurantInfo = useRestaurentInfo(id)
+    const { name,costForTwoMessage,city,cloudinaryImageId} = restaurantInfo
+   
+    return ( 
+        Object?.keys(restaurantInfo)?.length === 0  ? <RestaurentInfoShimmer /> :
+        <div className="resInfo">
             <h3>Restaurent Id : {id}</h3>
+            <h3>{name}</h3>
+            <img className="resInfoImg" alt="foodimg" src={imgCdnLink + cloudinaryImageId} />
+            <h4>{city}</h4>
+            <h4>{costForTwoMessage} Persons</h4>
         </div>
     )
 }
