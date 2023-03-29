@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import CircleIcon from '@mui/icons-material/Circle';
+import useOnline from '../utils/useOnline';
+
 export const NavItems = () => {
-  const [isLoggedIn,setIsLoggedIn] = useState(true)
+  const [isLoggedIn,setIsLoggedIn] = useState(true);
+  const isOnline = useOnline()
 
   return (
     <div className="nav-items">
@@ -25,7 +29,10 @@ export const NavItems = () => {
                 return setIsLoggedIn(!isLoggedIn)
                }}>LogIn</button>}
             </li>
+            {isOnline ?<CircleIcon fontSize='1rem' color="success"/> :
+             <CircleIcon fontSize='1rem' color="error"/>}
         </ul>
+        
     </div>
   )
 }
