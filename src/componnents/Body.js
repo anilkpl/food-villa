@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import SearchInput from '../utils/SearchInput'
-import useOnline from '../utils/useOnline'
-import "./Body.css"
-import { FoodCard } from './FoodCard'
-import Shimmer from './Shimmer'
+import React, {useEffect, useState} from 'react';
+import SearchInput from '../utils/SearchInput';
+import useOnline from '../utils/useOnline';
+import { FoodCard } from './FoodCard';
+import Shimmer from './Shimmer';
 import { filterdata } from "../utils/helper";
 import CircleIcon from '@mui/icons-material/Circle';
 import useGetAllRestaurentData from '../utils/useGetAllRestaurentData';
