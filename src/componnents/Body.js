@@ -6,23 +6,18 @@ import { FoodCard } from './FoodCard'
 import Shimmer from './Shimmer'
 import { filterdata } from "../utils/helper";
 import CircleIcon from '@mui/icons-material/Circle';
+import useGetAllRestaurentData from '../utils/useGetAllRestaurentData';
 
 export const Body = () => {
   const [inputVal,setInputVal] = useState('');
-  const [allRestaurants,setAllRestaurents] = useState([]);
-  const [fillteredRestaurants,setFillteredRestaurents] = useState([])
-
-  useEffect(() => {
-    getAllRestaurentData()
-  },[]);
-
+  const data = useGetAllRestaurentData();
+  const [allRestaurants,setAllRestaurents,fillteredRestaurants,setFillteredRestaurents] = data;
   const isOnline = useOnline();
   
   if (!isOnline) {
     return <h3 className='internetConError'><CircleIcon color='error'/> No internet Connection....Check the Network conections</h3>
   } 
-
-  
+ 
   const onChangeFun = (e) => {
     setInputVal(e?.target?.value)
     const filteredVal = filterdata(inputVal,allRestaurants)
@@ -32,23 +27,6 @@ export const Body = () => {
     (e?.target?.value=="" && setFillteredRestaurents(allRestaurants))
   }
 
-  async function getAllRestaurentData() {
-    try {
-       let data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING")
-       if(data?.ok) {
-        const jsonData = await data?.json();
-        setAllRestaurents(jsonData?.data?.cards[2]?.data?.data?.cards)
-        setFillteredRestaurents(jsonData?.data?.cards[2]?.data?.data?.cards)
-
-       } else {
-        throw new Error("Something went wrong : getAllRestaurents")
-       }
-    } catch (error) {
-      console.log(error.message)
-    }
-    
-  }
-  
  if(!allRestaurants) return null;
 
   return (allRestaurants?.length === 0 ?

@@ -19,6 +19,9 @@ export const NavItems = () => {
             <li>
               <NavLink to = "/contact">Contact</NavLink>
             </li>
+            <li>
+              <NavLink to = "/instamart">InstaMart</NavLink>
+            </li>
             <li>Cart</li>
             <li>
               {isLoggedIn? 
