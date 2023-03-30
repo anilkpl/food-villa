@@ -8,7 +8,10 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import Error from './pages/Error';
 import RestaurentMenu from './pages/RestaurentMenu';
+import { lazy, Suspense } from 'react';
+import RestaurentInfoShimmer from './componnents/RestaurentInfoShimmer';
 
+const InstaMart = lazy(() => import("./componnents/InstaMart"));
 
 function App() {
   return (
@@ -44,6 +47,12 @@ export const router = createBrowserRouter([
       {
         path : "restaurent/:id",
         element : <RestaurentMenu />
+      },
+      {
+        path : "instamart",
+        element : <Suspense fallback={<RestaurentInfoShimmer />}>
+                    <InstaMart />
+                  </Suspense>
       }
     ]
   }
