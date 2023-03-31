@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const Shimmer = () => {
   return (
-        <div className="shimmer-card">
+        <div className="w-52 h-72 m-3 p-3 shadow-lg rounded-lg break-words bg-white ml-5">
             <Skeleton height={100}/>
             <h4><Skeleton /></h4>
             <div className= "cuisines"><Skeleton /></div>

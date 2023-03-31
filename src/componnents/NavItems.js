@@ -6,29 +6,30 @@ import useOnline from '../utils/useOnline';
 export const NavItems = () => {
   const [isLoggedIn,setIsLoggedIn] = useState(true);
   const isOnline = useOnline()
+  const isActive = ({ isActive }) => isActive ? 'bg-red-200 font-bold p-1 rounded-md' : null
 
   return (
-    <div className="nav-items">
-        <ul>
+    <div >
+        <ul className="flex justify-between mt-10 space-x-5 tracking-wider text-lg">
             <li>
-              <NavLink to = "/">Home</NavLink>
+              <NavLink className={ isActive } to = "/">Home</NavLink>
             </li>
             <li>
-              <NavLink to = "/about">About</NavLink>
+              <NavLink className={ isActive } to = "/about">About</NavLink>
             </li>
             <li>
-              <NavLink to = "/contact">Contact</NavLink>
+              <NavLink className={ isActive } to = "/contact">Contact</NavLink>
             </li>
             <li>
-              <NavLink to = "/instamart">InstaMart</NavLink>
+              <NavLink className={ isActive } to = "/instamart">InstaMart</NavLink>
             </li>
-            <li>Cart</li>
+            <li className='tracking-wider text-lg'>Cart</li>
             <li>
               {isLoggedIn? 
-              <button onClick={() => {
+              <button className='tracking-wider text-lg' onClick={() => {
                 return setIsLoggedIn(!isLoggedIn)
               }}>LogOut</button>
-               : <button onClick={() => {
+               : <button className='tracking-wider text-lg' onClick={() => {
                 return setIsLoggedIn(!isLoggedIn)
                }}>LogIn</button>}
             </li>

@@ -15,11 +15,11 @@ const InstaMart = lazy(() => import("./componnents/InstaMart"));
 
 function App() {
   return (
-    <>
+    <div className='scrollbar-hide'> 
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 export const router = createBrowserRouter([
